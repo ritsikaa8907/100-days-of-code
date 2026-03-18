@@ -1,24 +1,21 @@
 //Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
 #include <stdlib.h>
 
-struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-};
-
 int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes) {
-
     if (root == NULL) {
         *returnSize = 0;
         *returnColumnSizes = NULL;
         return NULL;
     }
 
-    int** result = (int**)malloc(1000 * sizeof(int*));
-    *returnColumnSizes = (int*)malloc(1000 * sizeof(int));
+    int capacity = 2000;
 
-    struct TreeNode* queue[1000];
+    int** result = (int**)malloc(capacity * sizeof(int*));
+    *returnColumnSizes = (int*)malloc(capacity * sizeof(int));
+
+    // Dynamic queue
+    struct TreeNode** queue = (struct TreeNode**)malloc(capacity * sizeof(struct TreeNode*));
     int front = 0, rear = 0;
 
     queue[rear++] = root;
